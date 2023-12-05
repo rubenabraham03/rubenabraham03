@@ -1,3 +1,5 @@
+//Ruben Abraham
+
 #include "Task.h"
 #include <filesystem>
 #include <fstream>
@@ -5,39 +7,58 @@
 
 using namespace std;
 
-
+// Function to save tasks to a file
 void saveTasksToFile(const vector<Task>& tasks, const string& fileName)
 {
-	ofstream ostream(fileName);
-	ostream << tasks.size();
+    // Open a file stream for writing
+    ofstream ostream(fileName);
 
-	for (const Task& task : tasks) {
-		string description = task.description;
-			replace(description.begin(), description.end(), ' ', '_');
+    // Write the number of tasks to the file
+    ostream << tasks.size();
 
-			ostream << endl << description << ' ' << task.done;
-	}
+    // Loop through tasks and write each task to a new line in the file
+    for (const Task& task : tasks) {
+        // Replace spaces in the description with underscores for formatting
+        string description = task.description;
+        replace(description.begin(), description.end(), ' ', '_');
+
+        // Write the task details to the file
+        ostream << endl << description << ' ' << task.done;
+    }
 }
 
+// Function to load tasks from a file
 vector<Task> loadTasksFromFile(const string& fileName)
 {
-	if (!filesystem::exists(fileName)) {
-		return vector<Task>();
-	}
-	vector<Task> tasks;
-	ifstream istream(fileName);
+    // If the file doesn't exist, return an empty vector
+    if (!filesystem::exists(fileName)) {
+        return vector<Task>();
+    }
 
-	int n;
-	istream >> n;
+    // Vector to store loaded tasks
+    vector<Task> tasks;
 
-	for (int i = 0; i < n; i++) {
-		string description;
-		bool done;
+    // Open a file stream for reading
+    ifstream istream(fileName);
 
-		istream >> description >> done;
-		replace(description.begin(), description.end(), '_', ' ');
-		tasks.push_back(Task{ description, done });
+    // Read the number of tasks from the file
+    int n;
+    istream >> n;
 
-	}
-	return tasks;
+    // Loop through the tasks in the file and add them to the vector
+    for (int i = 0; i < n; i++) {
+        // Read task details from the file
+        string description;
+        bool done;
+        istream >> description >> done;
+
+        // Replace underscores in the description with spaces for formatting
+        replace(description.begin(), description.end(), '_', ' ');
+
+        // Create a task and add it to the vector
+        tasks.push_back(Task{ description, done });
+    }
+
+    // Return the vector of loaded tasks
+    return tasks;
 }

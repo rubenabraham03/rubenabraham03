@@ -1,10 +1,13 @@
+//RUben ABraham
 #pragma once
+
 #include <wx/wx.h>
 using namespace std;
 
-class App: public wxApp
+// App class representing the application
+class App : public wxApp
 {
 public:
-	bool OnInit();
+    // Function called when the application starts
+    bool OnInit();
 };
-

@@ -1,31 +1,43 @@
+//Ruben Abraham
 #pragma once
+
 #include <wx/wx.h>
 using namespace std;
 
-class MainFrame: public wxFrame
+// MainFrame class represents the main window of the To-Do application
+class MainFrame : public wxFrame
 {
 public:
-	MainFrame(const wxString& title);
+    // Constructor for the MainFrame
+    MainFrame(const wxString& title);
+
 private:
-	void CreateControls();
-	void BindEventHandlers();
-	void AddSavedtasks();
-	
-	void OnAddButtonClicked(wxCommandEvent& evt);
-	void OnInputEnter(wxCommandEvent& evt);
-	void OnListKeyDown(wxKeyEvent& evt);
-	void OnClearButtonClicked(wxCommandEvent& evt);
-	void OnWindowClosed(wxCloseEvent& evt);
+    // Function to create and set up UI controls
+    void CreateControls();
 
-	void AddTaskFromInput();
-	void DeleteSelectedTask();
+    // Function to bind event handlers for UI components
+    void BindEventHandlers();
 
-	wxPanel* panel;
-	wxStaticText* headlineText;
-	wxTextCtrl* inputField;
-	wxButton* addButton;
-	wxCheckListBox* checkListBox;
-	wxButton* clearButton;
+    // Function to load saved tasks from a file
+    void AddSavedtasks();
 
+    // Event handlers for UI component interactions
+    void OnAddButtonClicked(wxCommandEvent& evt);
+    void OnInputEnter(wxCommandEvent& evt);
+    void OnListKeyDown(wxKeyEvent& evt);
+    void OnClearButtonClicked(wxCommandEvent& evt);
+    void OnWindowClosed(wxCloseEvent& evt);
+
+    // Helper functions for task management
+    void AddTaskFromInput();
+    void DeleteSelectedTask();
+
+    // UI components
+    wxPanel* panel;               // Main panel
+    wxStaticText* headlineText;   // Headline text for the application
+    wxTextCtrl* inputField;       // Text input field for task descriptions
+    wxButton* addButton;          // Button to add tasks
+    wxCheckListBox* checkListBox;  // Check list box to display tasks
+    wxButton* clearButton;         // Button to clear tasks
 };
 
